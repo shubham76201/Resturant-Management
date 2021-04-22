@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style3.css' %}">{% endblock css %}
+{% block tag1 %}
+ 
+ {% if user.is_authenticated %}
+    <li>
+    <a href="#">Hi,<b>{{user}}</b></i></a>
+    </li>
+ {% else%}
+   <li><a href="signin">Sign-in </a></li>
+   
+ {% endif %}
+{% endblock tag1 %}
+{% block title %} 
+Booking
+   {% endblock %}
+
+{% block content %}
+ 
+ <div class="container1">   
+    <div class="container">
+        <div class="card">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://cdn.pixabay.com/photo/2013/07/13/01/11/chopsticks-155276_960_720.png">
+                    <h3>Book a Table </h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>From here you can book table in Our Resturant for Future Visit </p>
+                        <a href="book_table">Book Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://cdn.pixabay.com/photo/2017/02/01/10/31/food-2029493_960_720.png">
+                    <h3>Place an Order</h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>Get Food Ordered at your Home </p>
+                        <a href="#">Order Now </a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://cdn.pixabay.com/photo/2014/04/03/00/41/rotary-phone-309114_960_720.png">
+                    <h3>Contact Us</h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>Please contact us for any Issue related to Orders and Food Quality </p>
+                        <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+{% endblock content %}
+
+
+</html>
