@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block css %}<link rel="stylesheet" href="{% static 'style4.css' %}">{% endblock css %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style4.css' %}">{% endblock css %}
 {% block tag1 %}<li><a href="#">Sign-Up </a></li> {% endblock tag1 %}
 {% block content %}
 
@@ -9,63 +10,69 @@
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="name" placeholder="Your name..">
     <label for="id">Give an ID </label>
-    <input type="text" id="id" name="id" placeholder="Give any ID and Remember it">
+    <input type="text" id="id" name="book_id" placeholder="Give any ID and Remember it">
     <span> Select Your Time-Slot </span>
     <select name="timeslot">
-        <option value="9am">9 AM - 10AM
-        </option>
-        <option value="10am">10 AM - 11AM
-        </option>
-        <option value="11am">11 AM - 12 PM
-        </option>
-        <option value="12pm">12 PM - 1 PM
-        </option>
-        <option value="1pm">1 PM - 2 PM
-        </option>
-        <option value="2pm">2 PM - 3 PM
-        </option>
-        <option value="3pm">3 PM - 4 PM
-        </option>
-        <option value="4pm">4 PM - 5 PM
-        </option>
+      <option value="9am">9 AM - 10AM
+      </option>
+      <option value="10am">10 AM - 11AM
+      </option>
+      <option value="11am">11 AM - 12 PM
+      </option>
+      <option value="12pm">12 PM - 1 PM
+      </option>
+      <option value="1pm">1 PM - 2 PM
+      </option>
+      <option value="2pm">2 PM - 3 PM
+      </option>
+      <option value="3pm">3 PM - 4 PM
+      </option>
+      <option value="4pm">4 PM - 5 PM
+      </option>
     </select>
     <label> Select The Table No. </label>
-    <select name="table_no">
-        <option value="1000">1000
-        </option>
-        <option value="1100">1100
-        </option>
-        <option value="1200">1200
-        </option>
-        <option value="1300">1300
-        </option>
-        <option value="1400">1400
-        </option>
-        <option value="1500">1500
-        </option>
-        <option value="1600">1600
-        </option>
-        <option value="1700">1700
-        </option>
-    </select>
-    <label> Select your Table Type  </label>
+    <br>
+    <input type="radio" id="male" name="table_no" value="1000">
+    <label for="male">1000</label><br>
+    <input type="radio" id="female" name="table_no" value="1100">
+    <label for="female">1100</label>
+    <input type="radio" id="other" name="table_no" value="1200">
+    <label for="other">1200</label><br>
+    <input type="radio" id="other" name="table_no" value="1300">
+    <label for="other">1300</label>
+    <input type="radio" id="other" name="table_no" value="1400">
+    <label for="other">1400</label><br>
+    <input type="radio" id="other" name="table_no" value="1500">
+    <label for="other">1500</label>
+    <input type="radio" id="other" name="table_no" value="1600">
+    <label for="other">1600</label><br>
+    <input type="radio" id="other" name="table_no" value="1700">
+    <label for="other">1700</label>
+    <input type="radio" id="other" name="table_no" value="1800">
+    <label for="other">1800</label>
+    <br>
+    <label> Select your Table Type </label>
     <select name="table_type">
-        <option value="Normal">Normal
-        </option>
-        <option value="Premium">Premium
-        </option>
-        <option value="Premium Delux">Premium Delux 
-        </option>
+      <option disabled selected > Select Your Table Type
+      </option>
+      <option value="Normal">Normal
+      </option>
+      <option value="Premium">Premium
+      </option>
+      <option value="Premium Delux">Premium Delux
+      </option>
     </select>
+    <span>Select the Date of Arrival</span>
+    <input type="date" name="date" id="date">
     <span>Number of Guests</span>
-    <input type="text" name="guest" >
-    
-    <input type="submit" value="Book the Table" name="b1"/>
-    <input type="submit" value="Check for My Bookings" name="b1"/>
-    <input type="submit" value="Update the Booking" name="b1"/>
-    <input type="submit" value="Delete the Booking" name="b1"/>
+    <input type="text" name="guest">
+
+    <input type="submit" value="Book the Table" name="b1" />
+    <input type="submit" value="Check for My Bookings" name="b1" />
+    <input type="submit" value="Update the Booking" name="b1" />
+    <input type="submit" value="Delete the Booking" name="b1" />
   </form>
 </div>
 
 
-    {% endblock content %}
+{% endblock content %}

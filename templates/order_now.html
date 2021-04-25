@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style4.css' %}">{% endblock css %}
+{% block content %}
+
+<div id='test'>
+  <form action="{% url 'imageupload' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+      Name <input type="text" name="name" placeholder="Name"><br>  
+      Order Id <input type="text" name="orderid" placeholder="Order Id"><br>  
+      Enter a Image of Yours 
+      <br><br><input type="file" name="myfile" placeholder="Add your Image"><br>
+      Enter Your Gmail <br><input type="mail" name="email" placeholder=""><br>
+      <br>
+      Enter Your Snacks 
+      <select name="snack1">
+      <option value="Idli">Idli
+      </option>
+      <option value="Dosa">Dosa
+      </option>
+      <option value="Poha">Poha
+      </option>
+      <option value="Upma">Upma
+      </option>
+      <option value="Allo Paratha">Allo Paratha
+      </option>
+      </select>
+      <br>
+      Enter Your Lunch
+
+      <select name="lunch1">
+      <option value="Rajma Chawal">Rajma Chawal
+      </option>
+      <option value="Kaddi Pakora/Rice">Kaddi Pakora/Rice
+      </option>
+      <option value="Paneer/Roti">Paneer/Roti
+      </option>
+      <option value="Mixed Veg/Roti">Mixed Veg/Roti
+      </option>
+      <option value="Puri Biryani/Lemon Rice">Puri Biryani/Lemon Rice
+      </option>
+      </select>
+
+      <select name="beverages1">
+      <option value="Cold Drink">Cold Drink
+      </option>
+      <option value="Lemonade">Lemonade
+      </option>
+      <option value="Lassi">Lassi
+      </option>
+      <option value="Butter Milk">Butter Milk
+      </option>
+      <option value="Jal Jeera">Jal Jeera
+      </option>
+    </select>
+
+    <span>Date of Order</span>
+    <input type="date" name="date1" id="date">
+    </select>
+    <span>TakeAway</span>
+    <input type="checkbox" name="take" value="True"  checked>
+    <input type="submit" value="Submit" name="b1">
+    <input type="submit" value="Book an Order" name="b1" />
+    <input type="submit" value="Check for Booked Order" name="b1" />
+    <input type="submit" value="Update the Order" name="b1" />
+    <input type="submit" value="Delete my Order" name="b1" />
+  </form>
+</div>
+
+
+<br>
+<br>
+
+
+
+{% endblock content %}
