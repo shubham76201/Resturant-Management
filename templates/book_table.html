@@ -6,7 +6,8 @@
 {% block content %}
 
 <div id='test'>
-  <form action="book">
+  <form action="book" method="POST">
+  {% csrf_token %}
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="name" placeholder="Your name..">
     <label for="id">Give an ID </label>

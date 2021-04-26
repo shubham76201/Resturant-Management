@@ -29,7 +29,7 @@ class Order_Now(models.Model):
     image=models.URLField()
     name = models.CharField(max_length=255)
     gmail=models.EmailField(max_length=220)
-    order_id=models.IntegerField()
+    order_id=models.IntegerField(unique=True)
     Order_Snacks=models.CharField(max_length=255)
     Order_lunch=models.CharField(max_length=255)
     Order_Beverages=models.CharField(max_length=200)

@@ -102,6 +102,7 @@
             <div class="row">
                 <div class="col-6">
                     <h1 class="text-white">Shubham's Resturant</h1>
+                    <h4 class="text-black">{{msg}}</h4>
                 </div>
                 <div class="col-6">
                     <div class="company-details">
@@ -116,29 +117,30 @@
         <div class="body-section">
             <div class="row">
                 <div class="col-6">
-                    <h2 class="heading">Invoice No:{{u.orderid}}</h2>
+                    <h2 class="heading">Invoice No:{{order_id}}</h2>
                    
                 </div>
                 <div class="col-6">
                   <br>
-                      {% for u in uploads%}
-                    <img src="{{u.image}}" width="200px"><br>
+                      
+                    <img src="{{image}}" width="200px"><br>
+                
             
-                    <span  class="sub-heading">Full Name: <b id="1">{{u.name}}</b> </span><br><br>
-                    <span  class="sub-heading">Date of Delivery: <b id="2">{{u.date1}}</b> </span><br><br>
-                    <span id="3" class="sub-heading">Gmail: <b id="3">{{u.gmail}}</b> </span><br><br>
+                    <span  class="sub-heading">Full Name: <b id="1">{{name}}</b> </span><br><br>
+                    <span  class="sub-heading">Date of Delivery: <b id="2">{{date1}}</b> </span><br><br>
+                    <span id="3" class="sub-heading">Gmail: <b id="3">{{gmail}}</b> </span><br><br>
                     
-                    <span id="4" class="sub-heading">Order Snacks : <b id="4">{{u.Order_Snacks}}</b> </span><br><br>
-                    <span id="5" class="sub-heading">Order Lunch: <b id="5">{{u.Order_lunch}}</b>  </span><br><br>
-                    <span id="5" class="sub-heading">Order Beverages: <b id="5">{{u.Order_Beverages}}</b>  </span><br><br>
+                    <span id="4" class="sub-heading">Order Snacks : <b id="4">{{Order_Snacks}}</b> </span><br><br>
+                    <span id="5" class="sub-heading">Order Lunch: <b id="5">{{Order_lunch}}</b>  </span><br><br>
+                    <span id="5" class="sub-heading">Order Beverages: <b id="5">{{Order_Beverages}}</b>  </span><br><br>
+                    <span id="5" class="sub-heading">Delivery Type: <b id="5">{{msg1}}</b>  </span><br><br>
                     
                       
-          {% endfor %}
                 </div>
             </div>
         </div>
 
-        <
+
         <div class="body-section">
             <p>&copy; Copyright 2021 - shubhamrest. All rights reserved. 
                 <a href="https://www.shubhamrest.com/" class="float-right">www.shubhamrest.com</a>
