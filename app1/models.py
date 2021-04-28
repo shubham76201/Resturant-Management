@@ -30,6 +30,7 @@ class Order_Now(models.Model):
     name = models.CharField(max_length=255)
     gmail=models.EmailField(max_length=220)
     order_id=models.IntegerField(unique=True)
+    distance_from_home=models.FloatField()
     Order_Snacks=models.CharField(max_length=255)
     Order_lunch=models.CharField(max_length=255)
     Order_Beverages=models.CharField(max_length=200)

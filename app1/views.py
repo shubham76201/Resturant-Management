@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from app1.models import Signup, Book_table
 from django.contrib.auth.models import User, auth
 from django.core.files.storage import FileSystemStorage
 from .models import Order_Now
 # Create your views here.
 
-
-def signup(request):
-    if request.method == "POST":
+class signupView(View):
+  template_name="signup.html"
+  def post(self,request):
         username1 = request.POST.get('username1')
         first_name1 = request.POST.get('firstname1')
         email1 = request.POST.get('email')
@@ -20,11 +21,14 @@ def signup(request):
         print("User Created")
         return redirect('/')
 
-    else:
-        return render(request, 'signup.html')
+  def get(self,request):
+        return render(request, self.template_name)
 
 
-def signin(request):
+
+class signinView(View):
+  template_name="signin.html"
+  def post(self,request):
     if request.method == "POST":
         user1 = request.POST['uname']
         pass1 = request.POST['psw']
@@ -35,20 +39,24 @@ def signin(request):
             return redirect('booking')
         else:
             return redirect('signin')
-    else:
+  def get(self,request):
         return render(request, 'signin.html')
+    
+    
+class bookingView(View):
+  template_name="booking.html"
+  def get(self,request):
+    return render(request,self.template_name)
+
+class BookTableView(View):
+    template_name="book_table.html"
+    def get(self,request):
+     return render(request, self.template_name)
 
 
-def booking(request):
-    all_uploads = Order_Now.objects.all()
-    return render(request, 'booking.html')
-
-
-def book_table(request):
-    return render(request, 'book_table.html')
-
-
-def book(request):
+class bookView(View):
+  template_name="result.html"
+  def post(self,request):
     button = request.POST['b1']
     if button == "Book the Table" and request.method=="POST":
         book1 = request.POST['book_id']
@@ -61,13 +69,13 @@ def book(request):
         date1 = request.POST['date']
         obj = Book_table(booking_id=book1, name=name1, time_slot=timeslot1,
                                         table_no=table_no1, table_type=table_type1, guest_no=guest1, date=date1)
-        return render(request, 'result.html', {'book2': book1, 'name': name1, 'time': timeslot1, 'table_type': table_type1, 'guest': guest1, 'table': table_no1, 'date': date1})
+        return render(request, self.template_name, {'book2': book1, 'name': name1, 'time': timeslot1, 'table_type': table_type1, 'guest': guest1, 'table': table_no1, 'date': date1})
 
     if button == "Check for My Bookings" and request.method=="POST":
         id = request.POST['book_id']
         obj = Book_table.objects.get(booking_id=id)
         msg = "Record Selected"
-        return render(request, 'result.html', {'book2': id, 'name': obj.name, 'time': obj.time_slot, 'table_type': obj.table_type, 'guest': obj.guest_no, 'table': obj.table_no, 'id': obj.id})
+        return render(request, self.template_name, {'book2': id, 'name': obj.name, 'time': obj.time_slot, 'table_type': obj.table_type, 'guest': obj.guest_no, 'table': obj.table_no, 'id': obj.id})
 
     if button == "Update the Booking" and request.method=="POST":
         id = request.POST['book_id']
@@ -84,17 +92,18 @@ def book(request):
         obj.guest_no = guest1
         obj.save()
         msg = "Record Updated"
-        return render(request, 'result.html', {'book2': id, 'name': obj.name, 'time': obj.time_slot, 'table_type': obj.table_type, 'guest': obj.guest_no, 'table': obj.table_no, 'id': obj.id})
+        return render(request,self.template_name, {'book2': id, 'name': obj.name, 'time': obj.time_slot, 'table_type': obj.table_type, 'guest': obj.guest_no, 'table': obj.table_no, 'id': obj.id})
 
     if button == "Delete the Booking" and request.method=="POST":
         id = request.POST['book_id']
         obj = Book_table.objects.get(booking_id=id)
         obj.delete()
         msg = "Record Deleted" + obj.name
-        return render(request, 'book_table.html', {'msg': msg})
+        return render(request, self.template_name, {'msg': msg})
 
-
-def imageupload(request):
+class imageuploadView(View):
+ template_name="result.html"  
+ def post(self,request):
     button = request.POST['b1']
     if request.method == "POST" and request.FILES['myfile'] and button == "Book an Order":
             myfile = request.FILES['myfile']
@@ -109,6 +118,7 @@ def imageupload(request):
             Order_lunch2=request.POST['lunch1']
             Order_Beverages2=request.POST['beverages1']
             date12=request.POST['date1']
+            distance=request.POST['distance']
             check = request.POST.get('take', 0)
             msg ="Order Booking Slip"
             msg1=""
@@ -117,10 +127,10 @@ def imageupload(request):
             else:
                 msg1 ="Takeaway your Food after 30 min"
             
-            all_uploads=Order_Now(order_id=order_id2 , name=name2, gmail=gmail2,Order_Snacks=Order_Snacks2,Order_lunch=Order_lunch2,Order_Beverages=Order_Beverages2,date1=date12,image=image2,takeaway=check)
+            all_uploads=Order_Now(order_id=order_id2 , name=name2, gmail=gmail2,Order_Snacks=Order_Snacks2,Order_lunch=Order_lunch2,Order_Beverages=Order_Beverages2,date1=date12,image=image2,takeaway=check,distance_from_home=distance)
             all_uploads.save()
             
-            return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':order_id2 , 'name':name2, 'gmail':gmail2,'Order_Snacks':Order_Snacks2,'Order_lunch':Order_lunch2,'Order_Beverages':Order_Beverages2,'date1':date12,'image':image2})
+            return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':order_id2 , 'name':name2, 'gmail':gmail2,'Order_Snacks':Order_Snacks2,'Order_lunch':Order_lunch2,'Order_Beverages':Order_Beverages2,'date1':date12,'image':image2,'distance':distance})
 
     elif request.method == "POST" and request.FILES['myfile'] and button == "Check for Booked Order":
 
@@ -131,15 +141,14 @@ def imageupload(request):
 
             id = request.POST['orderid']
             obj = Order_Now.objects.get(order_id=id)
-            msg ="Order Viewing Slip"
             obj1=obj.takeaway
-            print(obj1)
+            msg ="Order Viewing Slip"
             if obj1==True:
                 msg1="Your Order will be delivered in 30 min"
             else:
                 msg1 ="Takeaway your Food after 30 min"
             
-            return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':id ,'name':obj.name,'gmail':obj.gmail,'Order_Snacks':obj.Order_Snacks,'Order_lunch':obj.Order_lunch,'Order_Beverages':obj.Order_Beverages,'date1':obj.date1,'image':obj.image})
+            return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':id ,'name':obj.name,'gmail':obj.gmail,'Order_Snacks':obj.Order_Snacks,'Order_lunch':obj.Order_lunch,'Order_Beverages':obj.Order_Beverages,'date1':obj.date1,'image':obj.image,'distance':obj.distance_from_home})
 
     elif request.method == "POST" and request.FILES['myfile'] and button == "Update the Order":
             myfile = request.FILES['myfile']
@@ -155,6 +164,7 @@ def imageupload(request):
             Order_Beverages2=request.POST['beverages1']
             date12=request.POST['date1']  
             id = request.POST['orderid']
+            distance1=request.POST['distance']
 
             obj = Order_Now.objects.get(order_id=id)  
             obj.name = name2
@@ -165,9 +175,19 @@ def imageupload(request):
             obj.Order_lunch = Order_lunch2
             obj.date1 = date12
             obj.image=image2
+            obj.distance_from_home=distance1
+            check = request.POST.get('take', 0)
+        
+            msg1=""
+            if check=="1":
+                obj.takeaway=True
+                msg1="Your Order will be delivered Soon"
+            else:
+                obj.takeaway=False
+                msg1 ="Takeaway your Food after 30 min"
             obj.save() 
             msg ="Order Updation Slip"
-            return render(request, 'result1.html',{'msg':msg,'order_id':id ,'name':obj.name,'gmail':obj.gmail,'Order_Snacks':obj.Order_Snacks,'Order_lunch':obj.Order_lunch,'Order_Beverages':obj.Order_Beverages,'date1':obj.date1,'image':obj.image})
+            return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':id ,'name':obj.name,'gmail':obj.gmail,'Order_Snacks':obj.Order_Snacks,'Order_lunch':obj.Order_lunch,'Order_Beverages':obj.Order_Beverages,'date1':obj.date1,'image':obj.image,'distance':obj.distance_from_home})
     elif request.method == "POST" and request.FILES['myfile'] and button == "Delete my Order":
             id = request.POST['orderid']
             obj = Order_Now.objects.get(order_id=id)

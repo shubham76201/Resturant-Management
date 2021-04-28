@@ -34,6 +34,8 @@
       Enter Your Lunch
 
       <select name="lunch1">
+        <option value="Idli" selected disabled>---None---
+        </option>
       <option value="Rajma Chawal">Rajma Chawal
       </option>
       <option value="Kaddi Pakora/Rice">Kaddi Pakora/Rice
@@ -47,6 +49,8 @@
       </select>
       Enter Your Beverages
       <select name="beverages1">
+        <option value="Idli" selected disabled>---None---
+        </option>
       <option value="Cold Drink">Cold Drink
       </option>
       <option value="Lemonade">Lemonade
@@ -63,7 +67,9 @@
     <input type="date" name="date1" id="date">
     </select>
     <span>Delivery at Home</span>
-    <input type="checkbox" name="take" value="1"  checked>
+    <input type="checkbox" name="take" value="1"  checked><br><br>
+    <span>Distance of Store</span>
+    <input type="text" name="distance" placeholder="--Give the distance of your's from our Nearest Store(In KM)--">
     <input type="submit" value="Book an Order" name="b1" />
     <input type="submit" value="Check for Booked Order" name="b1" />
     <input type="submit" value="Update the Order" name="b1" />
