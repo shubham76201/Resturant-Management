@@ -69,6 +69,7 @@ class bookView(View):
         date1 = request.POST['date']
         obj = Book_table(booking_id=book1, name=name1, time_slot=timeslot1,
                                         table_no=table_no1, table_type=table_type1, guest_no=guest1, date=date1)
+        obj.save()
         return render(request, self.template_name, {'book2': book1, 'name': name1, 'time': timeslot1, 'table_type': table_type1, 'guest': guest1, 'table': table_no1, 'date': date1})
 
     if button == "Check for My Bookings" and request.method=="POST":
@@ -105,7 +106,7 @@ class imageuploadView(View):
  template_name="result.html"  
  def post(self,request):
     button = request.POST['b1']
-    if request.method == "POST" and request.FILES['myfile'] and button == "Book an Order":
+    if request.method == "POST"  and button == "Book an Order" and request.FILES['myfile']:
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
@@ -127,21 +128,16 @@ class imageuploadView(View):
             else:
                 msg1 ="Takeaway your Food after 30 min"
             
-            all_uploads=Order_Now(order_id=order_id2 , name=name2, gmail=gmail2,Order_Snacks=Order_Snacks2,Order_lunch=Order_lunch2,Order_Beverages=Order_Beverages2,date1=date12,image=image2,takeaway=check,distance_from_home=distance)
+            all_uploads=Order_Now(order_id=order_id2 , name=name2, gmail=gmail2,Order_Snacks=Order_Snacks2,Order_lunch=Order_lunch2,Order_Beverages=Order_Beverages2,date1=date12,image=image2,Delivery=check,distance_from_home=distance)
             all_uploads.save()
             
             return render(request, 'result1.html',{'msg1':msg1,'msg':msg,'order_id':order_id2 , 'name':name2, 'gmail':gmail2,'Order_Snacks':Order_Snacks2,'Order_lunch':Order_lunch2,'Order_Beverages':Order_Beverages2,'date1':date12,'image':image2,'distance':distance})
 
-    elif request.method == "POST" and request.FILES['myfile'] and button == "Check for Booked Order":
-
-            myfile = request.FILES['myfile']
-            fs = FileSystemStorage()
-            filename = fs.save(myfile.name, myfile)
-            url = fs.url(filename)
+    elif request.method == "POST" and button == "Check for Booked Order":
 
             id = request.POST['orderid']
             obj = Order_Now.objects.get(order_id=id)
-            obj1=obj.takeaway
+            obj1=obj.Delivery
             msg ="Order Viewing Slip"
             if obj1==True:
                 msg1="Your Order will be delivered in 30 min"
@@ -180,10 +176,10 @@ class imageuploadView(View):
         
             msg1=""
             if check=="1":
-                obj.takeaway=True
+                obj.Delivery=True
                 msg1="Your Order will be delivered Soon"
             else:
-                obj.takeaway=False
+                obj.Delivery=False
                 msg1 ="Takeaway your Food after 30 min"
             obj.save() 
             msg ="Order Updation Slip"

@@ -35,7 +35,7 @@ class Order_Now(models.Model):
     Order_lunch=models.CharField(max_length=255)
     Order_Beverages=models.CharField(max_length=200)
     date1=models.DateField(max_length=255)
-    takeaway=models.BooleanField(default=False)
+    Delivery=models.BooleanField(default=False)
     
     def __str__(self):
         return self.name
